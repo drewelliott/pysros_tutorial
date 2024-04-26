@@ -1,0 +1,26 @@
+name: pysros
+
+mgmt:
+  network: pysros
+  ipv4-subnet: 10.5.5.0/24
+
+topology:
+  nodes:
+    sros:
+      kind: nokia_sros
+      image: vr-sros:23.7.R2
+      mgmt-ipv4: 10.5.5.5
+      type: sr-1
+      license: ~/license/license-sros23.txt
+      startup-config: sros.partial.config
+      binds:
+        - ./scripts/:/tftpboot/scripts/
+    srl:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:23.10.1
+      mgmt-ipv4: 10.5.5.6
+      #startup-config: srl.partial.config
+
+  links:
+    - endpoints: ["sros:eth1", "srl:e1-1"]
+    - endpoints: ["sros:eth2", "srl:e1-2"]
