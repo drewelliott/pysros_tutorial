@@ -1,3 +1,8 @@
+# Drew
+venv
+*.bak
+clab-*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
